@@ -7,6 +7,8 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { MenuAsideComponent } from './components/menu-aside/menu-aside.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [AppComponent, MenuAsideComponent],
   imports: [
@@ -15,6 +17,8 @@ import { MenuAsideComponent } from './components/menu-aside/menu-aside.component
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    RouterModule,
+    AppRoutingModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

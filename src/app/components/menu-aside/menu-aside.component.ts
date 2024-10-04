@@ -14,12 +14,12 @@ export class MenuAsideComponent implements OnInit {
 
   // Definir las secciones del menú con sus iconos y etiquetas
   menuItems = [
-    { icon: 'home', label: 'Home' },
-    { icon: 'shopping_cart', label: 'Products' },
-    { icon: 'people', label: 'Employees' },
-    { icon: 'assessment', label: 'Reports' },
-    { icon: 'payment', label: 'Payments' },
-    { icon: 'local_offer', label: 'Discounts' }
+    { icon: 'home', label: 'Home', route: '/home' },
+    { icon: 'shopping_cart', label: 'Products', route: '/products' },
+    { icon: 'people', label: 'Employees', route: '/employees' },
+    { icon: 'assessment', label: 'Reports', route: '/reports' },
+    { icon: 'payment', label: 'Payments', route: '/payments' },
+    { icon: 'local_offer', label: 'Discounts', route: '/discounts' }
   ];
 
   // Alternar el estado de cerrado/abierto
