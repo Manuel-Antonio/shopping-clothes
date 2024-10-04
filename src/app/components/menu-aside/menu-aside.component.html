@@ -1,0 +1,40 @@
+<aside
+  [ngClass]="isClosed ? 'w-16' : 'w-64'"
+  class="h-screen bg-gray-100 transition-width duration-300 flex flex-col justify-between"
+>
+  <img
+    src="https://img.freepik.com/premium-vector/clothing-shop-design-business-logo-template_278222-6750.jpg"
+    alt=""
+    class="p-4"
+  />
+  <nav class="flex-1">
+    <ul>
+      <li *ngFor="let item of menuItems" class="group">
+        <a
+          href="#"
+          class="flex items-center p-4 hover:bg-gray-200 transition-colors duration-200"
+        >
+          <mat-icon class="text-gray-700">{{ item.icon }}</mat-icon>
+          <span
+            *ngIf="!isClosed"
+            class="ml-4 text-gray-700 group-hover:text-gray-900"
+            >{{ item.label }}</span
+          >
+        </a>
+        <!-- Divisor entre secciones -->
+        <mat-divider *ngIf="!isLast(item)"></mat-divider>
+      </li>
+    </ul>
+  </nav>
+  <button
+    (click)="toggleAside()"
+    class="p-4 self-center flex items-center justify-center mb-4 bg-gray-200 hover:bg-gray-300 transition-colors duration-200 w-full"
+  >
+    <mat-icon>{{ isClosed ? "chevron_right" : "chevron_left" }}</mat-icon>
+    <span
+            *ngIf="!isClosed"
+            class="ml-4 text-gray-700 group-hover:text-gray-900"
+            >Cerrar panel</span
+          >
+  </button>
+</aside>
