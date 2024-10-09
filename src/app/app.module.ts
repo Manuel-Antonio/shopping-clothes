@@ -9,8 +9,25 @@ import { AppComponent } from './app.component';
 import { MenuAsideComponent } from './components/menu-aside/menu-aside.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { PageHomeComponent } from './pages/page-home/page-home.component';
+import { PageProductsComponent } from './pages/page-products/page-products.component';
+import { PageEmployeesComponent } from './pages/page-employees/page-employees.component';
+import { PageReportsComponent } from './pages/page-reports/page-reports.component';
+import { PagePaymentsComponent } from './pages/page-payments/page-payments.component';
+import { PageDiscountsComponent } from './pages/page-discounts/page-discounts.component';
+import { AnnualSalesComponent } from './components/annual-sales/annual-sales.component';
 @NgModule({
-  declarations: [AppComponent, MenuAsideComponent],
+  declarations: [
+    AppComponent, 
+    MenuAsideComponent,
+    PageHomeComponent,
+    PageProductsComponent,
+    PageEmployeesComponent,
+    PageReportsComponent,
+    PagePaymentsComponent,
+    PageDiscountsComponent,
+    AnnualSalesComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -18,7 +35,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatIconModule,
     MatDividerModule,
     RouterModule,
-    AppRoutingModule 
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
