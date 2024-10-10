@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './menu-aside.component.html',
   styleUrls: ['./menu-aside.component.css']
 })
-export class MenuAsideComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
+export class MenuAsideComponent{
+ 
   isClosed = false; // Controla si el menú está cerrado o abierto
 
   // Definir las secciones del menú con sus iconos y etiquetas

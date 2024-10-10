@@ -56,4 +56,15 @@ export const productsData: Product[] = [
     categoryId: 5,
     branchId: 2,
   },
+  {
+    productId: 6,
+    name: 'Vestido de Noche',
+    description: 'Vestido largo perfecto para eventos formales.',
+    price: 120.0,
+    stock: 10,
+    image: 'https://via.placeholder.com/150',
+    discount: 25,
+    categoryId: 5,
+    branchId: 2,
+  },
 ];

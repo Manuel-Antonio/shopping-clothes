@@ -16,6 +16,11 @@ import { PageReportsComponent } from './pages/page-reports/page-reports.componen
 import { PagePaymentsComponent } from './pages/page-payments/page-payments.component';
 import { PageDiscountsComponent } from './pages/page-discounts/page-discounts.component';
 import { AnnualSalesComponent } from './components/annual-sales/annual-sales.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -36,6 +41,11 @@ import { AnnualSalesComponent } from './components/annual-sales/annual-sales.com
     MatDividerModule,
     RouterModule,
     AppRoutingModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent],

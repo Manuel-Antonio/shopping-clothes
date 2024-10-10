@@ -1,16 +1,93 @@
 <div class="p-6 bg-gray-100 min-h-screen">
-  <h1 class="text-2xl font-bold mb-6">Nuestros Productos</h1>
+  <h1 class="text-2xl font-bold mb-1">Listado de Productos</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let product of getProducts()" class="bg-white rounded-lg shadow p-4">
-      <img [src]="product.image" alt="{{ product.name }}" class="rounded-t-lg w-full h-48 object-cover" />
-      <h3 class="font-semibold mt-2">{{ product.name }}</h3>
-      <p class="text-gray-500">{{ product.description }}</p>
-      <p class="text-xl font-bold text-blue-500 mt-2">${{ product.price | number:'1.2-2' }} 
-        <span *ngIf="product.discount > 0" class="text-red-500 line-through ml-2">${{ product.price + product.discount | number:'1.2-2' }}</span>
-      </p>
-      <p class="text-gray-700">Stock: {{ product.stock }}</p>
-      <button mat-button color="primary" class="mt-2 w-full" [disabled]="product.stock <= 0">Agregar al Carrito</button>
+  <!-- Opciones de tabla-->
+  <div class="flex space-x-2 justify-end">
+    <button mat-raised-button color="primary">Crear</button>
+    <button mat-raised-button color="accent">Actualizar</button>
+    <button mat-raised-button color="warn">Eliminar</button>
+  </div>
+
+  <!-- Contenedor flex de tabla + paginador -->
+  <div class="mt-5 flex flex-col h-full">
+    <!-- Tabla de productos -->
+    <div class="flex-grow">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        (matSortChange)="announceSortChange($event)"
+      >
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              aria-label="Select all rows"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+              aria-label="Select row"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Columnas adicionales -->
+        <!-- No., Nombre, Imagen, Precio, Stock, Descuento, Categoría -->
+        <ng-container matColumnDef="productId">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.productId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef>Stock</th>
+          <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="discount">
+          <th mat-header-cell *matHeaderCellDef>Discount</th>
+          <td mat-cell *matCellDef="let element">{{ element.discount }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoryId">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let element">{{ element.categoryId }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
+
+    <!-- Paginador abajo -->
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </div>
 </div>
