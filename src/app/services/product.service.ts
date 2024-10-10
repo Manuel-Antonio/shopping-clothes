@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Product } from '../models/product.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,9 +12,9 @@ export class ProductService {
 
   getProduct(productId: number) {}
 
-  addProduct(product: any) {}
+  addProduct(product: Product) {}
 
-  updateProduct(productId: number, product: any) {}
+  updateProduct(productId: number, product: Product) {}
 
   deleteProduct(productId: number) {}
 }

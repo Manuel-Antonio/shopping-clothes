@@ -5,6 +5,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { MenuAsideComponent } from './components/menu-aside/menu-aside.component';
 import { RouterModule } from '@angular/router';
@@ -17,10 +18,11 @@ import { PagePaymentsComponent } from './pages/page-payments/page-payments.compo
 import { PageDiscountsComponent } from './pages/page-discounts/page-discounts.component';
 import { AnnualSalesComponent } from './components/annual-sales/annual-sales.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { MatSortModule} from '@angular/material/sort';
+import { ProductCreatePanelComponent } from './components/product-create-panel/product-create-panel.component';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -31,7 +33,8 @@ import { MatSortModule} from '@angular/material/sort';
     PageReportsComponent,
     PagePaymentsComponent,
     PageDiscountsComponent,
-    AnnualSalesComponent
+    AnnualSalesComponent,
+    ProductCreatePanelComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import { MatSortModule} from '@angular/material/sort';
     FormsModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -19,9 +19,6 @@ import { Product } from 'src/app/models/product.model';
 })
 export class PageProductsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
-  isEnabledModeList: boolean = false;
-  readonly checked = false;
-  readonly indeterminate = false;
   ELEMENT_DATA: Product[] = productsData;
   displayedColumns: string[] = [
     'select', 
@@ -34,10 +31,16 @@ export class PageProductsComponent implements OnInit, AfterViewInit {
     'categoryId',
   ];
   dataSource = new MatTableDataSource<Product>(this.ELEMENT_DATA);
+  
+
+  selectedModeModify :string = '';
   private _liveAnnouncer = inject(LiveAnnouncer);
   constructor() {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngOnInit() {}
+
+  // Metodos de tabla
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -46,22 +49,7 @@ export class PageProductsComponent implements OnInit, AfterViewInit {
     return productsData;
   }
 
-  switchToListView() {
-    console.log('Modo listado');
-  }
-  switchToGridView() {
-    console.log('Modo Grid');
-  }
-
-  switchEnabledModeList() {
-    this.isEnabledModeList = !this.isEnabledModeList;
-    if (this.isEnabledModeList) {
-      this.switchToListView();
-    } else {
-      this.switchToGridView();
-    }
-  }
-  selection = new SelectionModel<any>(true, []); // 'true' para permitir selección múltiple
+  selection = new SelectionModel<any>(true, []); 
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -69,17 +57,22 @@ export class PageProductsComponent implements OnInit, AfterViewInit {
     return numSelected === numRows;
   }
 
+  // Metodos para paginacion
+
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    console.log('Ordenando', sortState);
     this._liveAnnouncer.announce('Sorting cleared');
   }
+
+  // Metodos para CRUD
+
+  modePanelCreate() {
+    this.selectedModeModify = 'C';
+    console.log(this.selectedModeModify)
+  }
+
 }

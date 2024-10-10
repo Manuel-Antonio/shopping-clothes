@@ -3,86 +3,133 @@
 
   <!-- Opciones de tabla-->
   <div class="flex space-x-2 justify-end">
-    <button mat-raised-button color="primary">Crear</button>
-    <button mat-raised-button color="accent">Actualizar</button>
-    <button mat-raised-button color="warn">Eliminar</button>
+    <button mat-raised-button color="primary" (click)="modePanelCreate()">
+      <mat-icon>add-circle</mat-icon>
+      Create</button>
+    <button mat-raised-button color="accent" (click)="modePanelCreate()">
+      <mat-icon>edit</mat-icon>
+      
+      Update</button>
+    <button mat-raised-button color="warn" (click)="modePanelCreate()">
+      <mat-icon>delete</mat-icon>
+
+      Delete</button>
+      <button mat-raised-button color="">
+        <mat-icon>filter_alt</mat-icon>
+        Filter Advanced</button>
   </div>
+  <!-- Tabla de productos -->
+  <div class="mt-5">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            aria-label="Select all rows"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            aria-label="Select row"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="productId">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          No.
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.productId }}</td>
+      </ng-container>
 
-  <!-- Contenedor flex de tabla + paginador -->
-  <div class="mt-5 flex flex-col h-full">
-    <!-- Tabla de productos -->
-    <div class="flex-grow">
-      <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-        (matSortChange)="announceSortChange($event)"
-      >
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox
-              (change)="$event ? masterToggle() : null"
-              [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()"
-              aria-label="Select all rows"
-            >
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox
-              (click)="$event.stopPropagation()"
-              (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)"
-              aria-label="Select row"
-            >
-            </mat-checkbox>
-          </td>
-        </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          Name
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+      </ng-container>
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          Price
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      </ng-container>
 
-        <!-- Columnas adicionales -->
-        <!-- No., Nombre, Imagen, Precio, Stock, Descuento, Categoría -->
-        <ng-container matColumnDef="productId">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
-          <td mat-cell *matCellDef="let element">{{ element.productId }}</td>
-        </ng-container>
+      <!-- Stock Column -->
+      <ng-container matColumnDef="stock">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          Stock
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+      </ng-container>
+      <!-- Discount Column -->
+      <ng-container matColumnDef="discount">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          Discount
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.discount }}</td>
+      </ng-container>
+      <!-- Category Column -->
+      <ng-container matColumnDef="categoryId">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by number"
+        >
+          Category
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.categoryId }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef>Image</th>
-          <td mat-cell *matCellDef="let element">{{ element.image }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
-          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="stock">
-          <th mat-header-cell *matHeaderCellDef>Stock</th>
-          <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="discount">
-          <th mat-header-cell *matHeaderCellDef>Discount</th>
-          <td mat-cell *matCellDef="let element">{{ element.discount }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="categoryId">
-          <th mat-header-cell *matHeaderCellDef>Category</th>
-          <td mat-cell *matCellDef="let element">{{ element.categoryId }}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
-
-    <!-- Paginador abajo -->
     <mat-paginator
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
@@ -91,3 +138,4 @@
     </mat-paginator>
   </div>
 </div>
+<app-product-create-panel [modeModify]="selectedModeModify"></app-product-create-panel>
